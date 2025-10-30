@@ -70,102 +70,102 @@ classes = ('real', 'fake')
 # =======================================================
 #                   Model Definition
 # =======================================================
-#Original model
-    # def __init__(self):
-    #     super(Defaker_CNN, self).__init__()
-    #     self.conv1 = nn.Conv2d(3, 6, 5)
-    #     self.pool = nn.MaxPool2d(2, 2)
-    #     self.conv2 = nn.Conv2d(6, 16, 5)
-    #     self.fc1 = nn.Linear(16 * 5 * 5, 120)
-    #     self.fc2 = nn.Linear(120, 84)
-    #     self.fc3 = nn.Linear(84, 10)
+# #Original model
+# def __init__(self):
+#         super(Defaker_CNN, self).__init__()
+#         self.conv1 = nn.Conv2d(3, 6, 5)
+#         self.pool = nn.MaxPool2d(2, 2)
+#         self.conv2 = nn.Conv2d(6, 16, 5)
+#         self.fc1 = nn.Linear(16 * 5 * 5, 120)
+#         self.fc2 = nn.Linear(120, 84)
+#         self.fc3 = nn.Linear(84, 10)
         
-    # def forward(self, discrim_in):
-    #     discrim_in = self.pool(F.relu(self.conv1(discrim_in)))
-    #     discrim_in = self.pool(F.relu(self.conv2(discrim_in)))
-    #     discrim_in = discrim_in.view(-1, 16 * 5 * 5)
-    #     discrim_in = F.relu(self.fc1(discrim_in))
-    #     discrim_in = F.relu(self.fc2(discrim_in))
-    #     discrim_in = self.fc3(discrim_in)
-    #     return discrim_in
+# def forward(self, discrim_in):
+#         discrim_in = self.pool(F.relu(self.conv1(discrim_in)))
+#         discrim_in = self.pool(F.relu(self.conv2(discrim_in)))
+#         discrim_in = discrim_in.view(-1, 16 * 5 * 5)
+#         discrim_in = F.relu(self.fc1(discrim_in))
+#         discrim_in = F.relu(self.fc2(discrim_in))
+#         discrim_in = self.fc3(discrim_in)
+#         return discrim_in
     
-    # def loss(self, real, fake):
+# def loss(self, real, fake):
 
-    #     real_labels = torch.ones_like(real)
-    #     real_loss = self.loss_fn(real, real_labels)
+#         real_labels = torch.ones_like(real)
+#         real_loss = self.loss_fn(real, real_labels)
 
-    #     fake_labels = torch.zeros_like(fake)
-    #     fake_loss = self.loss_fn(fake, fake_labels)
+#         fake_labels = torch.zeros_like(fake)
+#         fake_loss = self.loss_fn(fake, fake_labels)
 
-    #     total_loss = real_loss + fake_loss
-    #     return total_loss
+#         total_loss = real_loss + fake_loss
+#         return total_loss
 
 #version 1
-class Defaker_CNN(nn.Module):
-    def __init__(self):
-        super(Defaker_CNN, self).__init__()
-        self.conv1 = nn.Conv2d(3, 6, 5)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.conv2 = nn.Conv2d(6, 16, 5)
-        self.fc1 = nn.Linear(16 * 61 * 61, 120)  # adjusted for 256x256 input
-        self.fc2 = nn.Linear(120, 84)
-        self.fc3 = nn.Linear(84, 2)
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = x.view(x.size(0), -1)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
-        return x
-
-# #version 2
 # class Defaker_CNN(nn.Module):
 #     def __init__(self):
 #         super(Defaker_CNN, self).__init__()
-
-#         # 1st Convolution Block
-#         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
-#         self.bn1 = nn.BatchNorm2d(32)
-
-#         # 2nd Convolution Block
-#         self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
-#         self.bn2 = nn.BatchNorm2d(64)
-
-#         # 3rd Convolution Block
-#         self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
-#         self.bn3 = nn.BatchNorm2d(128)
-
-#         # Fully connected layers
-#         self.fc1 = nn.Linear(128 * 32 * 32, 512)
-#         self.dropout = nn.Dropout(0.3)
-#         self.fc2 = nn.Linear(512, 128)
-#         self.fc3 = nn.Linear(128, 2)
+#         self.conv1 = nn.Conv2d(3, 6, 5)
+#         self.pool = nn.MaxPool2d(2, 2)
+#         self.conv2 = nn.Conv2d(6, 16, 5)
+#         self.fc1 = nn.Linear(16 * 61 * 61, 120)  # adjusted for 256x256 input
+#         self.fc2 = nn.Linear(120, 84)
+#         self.fc3 = nn.Linear(84, 2)
 
 #     def forward(self, x):
-#         # Block 1
-#         x = F.relu(self.bn1(self.conv1(x)))
-#         x = F.max_pool2d(x, 2, 2)
-
-#         # Block 2
-#         x = F.relu(self.bn2(self.conv2(x)))
-#         x = F.max_pool2d(x, 2, 2)
-
-#         # Block 3
-#         x = F.relu(self.bn3(self.conv3(x)))
-#         x = F.max_pool2d(x, 2, 2)
-
-#         # Flatten
+#         x = self.pool(F.relu(self.conv1(x)))
+#         x = self.pool(F.relu(self.conv2(x)))
 #         x = x.view(x.size(0), -1)
-
-#         # Fully connected layers
 #         x = F.relu(self.fc1(x))
-#         x = self.dropout(x)
 #         x = F.relu(self.fc2(x))
-#         x = self.dropout(x)
 #         x = self.fc3(x)
 #         return x
+
+#version 2
+class Defaker_CNN(nn.Module):
+    def __init__(self):
+        super(Defaker_CNN, self).__init__()
+
+        # 1st Convolution Block
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+
+        # 2nd Convolution Block
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+
+        # 3rd Convolution Block
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
+
+        # Fully connected layers
+        self.fc1 = nn.Linear(128 * 32 * 32, 512)
+        self.dropout = nn.Dropout(0.3)
+        self.fc2 = nn.Linear(512, 128)
+        self.fc3 = nn.Linear(128, 2)
+
+    def forward(self, x):
+        # Block 1
+        x = F.relu(self.bn1(self.conv1(x)))
+        x = F.max_pool2d(x, 2, 2)
+
+        # Block 2
+        x = F.relu(self.bn2(self.conv2(x)))
+        x = F.max_pool2d(x, 2, 2)
+
+        # Block 3
+        x = F.relu(self.bn3(self.conv3(x)))
+        x = F.max_pool2d(x, 2, 2)
+
+        # Flatten
+        x = x.view(x.size(0), -1)
+
+        # Fully connected layers
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        x = F.relu(self.fc2(x))
+        x = self.dropout(x)
+        x = self.fc3(x)
+        return x
 
 # =======================================================
 #                   Model Setup
@@ -327,23 +327,43 @@ else:
 # =======================================================
 #                   Model Inference
 # =======================================================
+# def run_model(image): 
+#     image = image.resize((256, 256))
+#     image_tensor = transform(image).unsqueeze(0).to(device)
+#     defaker.eval()
+#     opinions = []
+
+#     with torch.no_grad():
+#         # for _ in range(50):
+#             outputs = defaker(image_tensor)
+#             probs = F.softmax(outputs, dim=1)
+#             #pred = torch.argmax(probs, dim=1).item()
+#             # opinions.append(pred == 1)
+#             fake_prob = probs[0][1].item() * 100  # Convert to percentage 10/30/2025
+#             #Actual model confidence from the neural net output layer
+
+#     # fake_prob = model_probability_opinion(opinions)
+#     print(f"Model Certainty that image is fake: {fake_prob:.2f}%")
+#     return fake_prob
+
 def run_model(image): 
+    # Resize and transform the input image
     image = image.resize((256, 256))
     image_tensor = transform(image).unsqueeze(0).to(device)
+
+    # Set model to evaluation mode
     defaker.eval()
-    opinions = []
 
     with torch.no_grad():
-        for _ in range(50):
-            outputs = defaker(image_tensor)
-            probs = F.softmax(outputs, dim=1)
-            pred = torch.argmax(probs, dim=1).item()
-            opinions.append(pred == 1)
+        # Run the model once on the image
+        outputs = defaker(image_tensor)
+        probs = F.softmax(outputs, dim=1)
 
-    fake_prob = model_probability_opinion(opinions)
+        # Get the probability that the image is fake (class index 1)
+        fake_prob = probs[0][1].item() * 100  # Convert to percentage
+
     print(f"Model Certainty that image is fake: {fake_prob:.2f}%")
     return fake_prob
-
 # =======================================================
 #                   FastAPI Setup
 # =======================================================
