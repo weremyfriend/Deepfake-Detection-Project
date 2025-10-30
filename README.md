@@ -2,11 +2,16 @@
 
 # Requirements
 PyTorch:        `pip install torch`
+
 Torchvision:    `pip install torchvision`
+
 Uvicorn:        `pip install uvicorn`
+
 FastAPI:        `pip install fastAPI`
+
 <!--added 10/29/2025 - Walker Hall -->
 Flask           `pip install flask`
+
 Python-multipart `pip install python-multipart`
 
 <!-- not needed 10/30/2025-->
@@ -37,4 +42,5 @@ https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images
 Add the training and testing images to their respective folders. 
 
 Adding images will make the model retrain on restart
+
 Delete the contents in the saved_models folder to start from scratch if a model/optimizer is present
