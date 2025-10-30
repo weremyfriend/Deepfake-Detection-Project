@@ -1,18 +1,13 @@
 # Deepfake Detection Project
 
 # Requirements
-PyTorch:        pip install torch
-<br>
-Torchvision:    pip install torchvision
-<br>
-Uvicorn:        pip install uvicorn
-<br>
-FastAPI:        pip install fastAPI
-<br>
+PyTorch:        `pip install torch`
+Torchvision:    `pip install torchvision`
+Uvicorn:        `pip install uvicorn`
+FastAPI:        `pip install fastAPI`
 <!--added 10/29/2025 - Walker Hall -->
-Flask           pip install flask
-<br>
-Pythonmultipart pip install python-multipart
+Flask           `pip install flask`
+Python-multipart `pip install python-multipart`
 
 <!-- not needed 10/30/2025-->
 # Kaggle Steps: 
