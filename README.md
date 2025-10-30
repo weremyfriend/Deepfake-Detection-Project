@@ -1,23 +1,30 @@
-# Deepfake-Defaker
-Deepfake Defaker
+# Deepfake Detection Project
 
 # Requirements
 PyTorch:        pip install torch
+<br>
 Torchvision:    pip install torchvision
+<br>
 Uvicorn:        pip install uvicorn
+<br>
 FastAPI:        pip install fastAPI
+<br>
 <!--added 10/29/2025 - Walker Hall -->
 Flask           pip install flask
+<br>
 Pythonmultipart pip install python-multipart
 
 <!-- not needed 10/30/2025-->
 # Kaggle Steps: 
-Users must get their authentication key from Kaggle.com. As the Kaggle API will not run without your key. 
-Next step is users must use the Van Gogh Paintings dataset from following Kaggle user: ipythonx/van-gogh-paintings (ipythonx is the users name, and Van-gogh-paintings is name of dataset used in this project)
+~~Users must get their authentication key from Kaggle.com. As the Kaggle API will not run without your key. 
+Next step is users must use the Van Gogh Paintings dataset from following Kaggle user: ipythonx/van-gogh-paintings (ipythonx is the users name, and Van-gogh-paintings is name of dataset used in this project)~~
 
 
 # Run FastAPI server
-To run the server you must run the bash command `uvicorn app.defaker-test:app --host 127.0.0.1 --port 5000 --reload`.
+To run the server you must run the bash command
+<br>
+~~~uvicorn app.defaker-test:app --host 127.0.0.1 --port 5000 --reload~~~
+<br>
 This will run the server using FastAPI and ensure the Python file can connect to the JavaScript file via an endpoint.
 
 <!--added 10/29/2025 - Walker Hall -->
@@ -28,7 +35,9 @@ Navigate to `http://127.0.0.1:5000/ui/deepfake_defake_ui.html`
 # Training
 Find a good source for training data for deepfake images. A Google search shows promising results with sources that include over 1000 thousand images.
 Examples:
+<br>
 https://www.kaggle.com/datasets/philosopher0808/real-vs-ai-generated-faces-dataset
+<br>
 https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images
 
 Add the training and testing images to their respective folders. 
