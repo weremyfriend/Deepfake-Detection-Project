@@ -15,8 +15,8 @@ dataset/train/real/*
 !dataset/train/real/.gitkeep
 
 #Ignore original folders that are no longer needed
-/van-gogh-dataset
-/uploads
+/van-gogh-dataset/
+/uploads/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
