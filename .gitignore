@@ -1,6 +1,7 @@
 #Project specific
 # Ignore all files inside the 'saved_models' folder. When cloning the repo, the user should build the model from scratch with their own data
 saved_models/*
+!saved_models/.gitkeep
 
 # Ignore all the images/files inside the dataset folders. Users should use their own image sources.
 dataset/test/fake/*
@@ -8,6 +9,10 @@ dataset/test/real/*
 dataset/train/fake/*
 dataset/train/real/*
 
+!dataset/test/fake/.gitkeep
+!dataset/test/real/.gitkeep
+!dataset/train/fake/.gitkeep
+!dataset/train/real/.gitkeep
 
 
 # Byte-compiled / optimized / DLL files
