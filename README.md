@@ -22,9 +22,8 @@ Next step is users must use the Van Gogh Paintings dataset from following Kaggle
 
 # Run FastAPI server
 To run the server you must run the bash command
-<br>
-~~~uvicorn app.defaker-test:app --host 127.0.0.1 --port 5000 --reload~~~
-<br>
+`uvicorn app.defaker-test:app --host 127.0.0.1 --port 5000 --reload`
+
 This will run the server using FastAPI and ensure the Python file can connect to the JavaScript file via an endpoint.
 
 <!--added 10/29/2025 - Walker Hall -->
