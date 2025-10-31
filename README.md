@@ -36,14 +36,14 @@ b. https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images
 
 
 
-## Run the FastAPI server
+## 3. Run the FastAPI server
 To run the server you must be in the root of the proram <br>
 `uvicorn app.main:app --host 127.0.0.1 --port 5000 --reload`
 
 This will run the server using FastAPI and ensure the Python file can connect to the JavaScript file via an endpoint.
 
 <!--added 10/29/2025 - Walker Hall -->
-## 3. UI
+## 4. UI
 Navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running the server
 
 
