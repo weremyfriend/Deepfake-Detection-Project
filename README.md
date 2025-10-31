@@ -53,5 +53,5 @@ Navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running 
 2. Improve accuracy and performance of model from scratch
 3. Include different models
 4. Linux support with AMD GPUs  (ROCm)
-5. Containerization
+5. Containerization/deployable on a server
 6. Detect deepfakes from videos
