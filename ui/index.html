@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepfake Detection Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="detector-card">
+            <h1 class="card-title">🔍 Deepfake Detector</h1>
+            
+            <div id="imageContainer" class="image-preview-container">
+                <img id="imagePreview" src="" alt="Preview">
+                <div id="placeholderText" class="placeholder-text">
+                    Click "Upload Image" to select a photo
+                </div>
+            </div>
+
+            <input type="file" id="formFile" class="file-input" accept="image/*">
+            <button class="upload-btn" onclick="document.getElementById('formFile').click()">
+                Upload Image
+            </button>
+            
+            <button id="analyzeBtn" class="analyze-btn" disabled>
+                Analyze Image
+            </button>
+
+            <div class="loading-spinner" id="loadingSpinner">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px; color: #667eea;">Analyzing image...</p>
+            </div>
+
+            <div id="resultContainer" class="result-container">
+                <div class="result-label" id="resultLabel"></div>
+                <div class="result-percentage" id="resultPercentage"></div>
+                <div class="result-description" id="resultDescription"></div>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
