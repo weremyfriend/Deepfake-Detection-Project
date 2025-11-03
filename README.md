@@ -1,6 +1,11 @@
 # Deepfake Detection Project
 
 ## 1. Requirements
+Python 3.14.0
+
+pip 25.3
+
+
 PyTorch:        `pip install torch`
 
 Torchvision:    `pip install torchvision`
@@ -9,14 +14,23 @@ Uvicorn:        `pip install uvicorn`
 
 FastAPI:        `pip install fastAPI`
 
-Flask           `pip install flask`
+PIL:        `pip install pillow`
 
 Python-multipart `pip install python-multipart`
+
+Microsoft Visual C++ Redistributable (2015-2022) `https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version`
 
 ### (optional)
 **For NVIDIA GPUs**
 
 CUDA PyTorch        `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu126`
+
+<!-- 11/2/2025
+**For testing**
+Pytest  `pip install pytest`
+Pytest-cov `pip install pytest-cov`
+FastAPI (all dependencies) `pip install fastapi[all]`
+-->
 
 
 
@@ -46,7 +60,10 @@ This will run the server using FastAPI and ensure the Python file can connect to
 ## 4. UI
 Navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running the server
 
-
+<!-- 11/2/2025
+## Testing (11/2/2025)
+Run all unit tests `python -m unittest discover tests` or `pytest tests/ -v`
+-->
 
 ## Todo
 1. Fix UI routing
@@ -54,4 +71,5 @@ Navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running 
 3. Include different models
 4. Linux support with AMD GPUs  (ROCm)
 5. Containerization/deployable on a server
-6. Detect deepfakes from videos
+6. Unrestricted file upload, CORS middleware, fix internal HTTP errors to prevent information disclosure, authentication, delete uploaded files, encrypt user data, and HTTPS.
+7. Detect deepfakes from videos

@@ -2,7 +2,7 @@
 # test and utility functions in case we upload from an image folder (could be used for batch images)
 
 import os
-from PIL import Image
+from PIL import Image, UnidentifiedImageError # <- for corrupted images
 import numpy as np
 import torch
 from torch.utils.data import Dataset
@@ -47,3 +47,31 @@ class ImagesDataset(Dataset):
         if self.device:
             i_to_t = i_to_t.to(self.device)
         return i_to_t
+    
+
+
+
+# =======================================================
+#                Functional Testing  
+# =======================================================
+
+
+# for images
+
+
+def clean_dataset(folder_path):
+    # removes files that are not images
+    valid_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif')
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            if not file.lower().endswith(valid_extensions) or file == ".gitkeep": # ignore .gitkeep for now
+                print(f"Skipping non-image file: {file_path}")
+                os.remove(file_path)
+                continue
+            try:
+                with Image.open(file_path) as img:
+                    img.verify()  # PIL function that checks if an image is corrupted
+            except (UnidentifiedImageError, OSError):
+                print(f"Removing corrupted image: {file_path}")
+                os.remove(file_path)

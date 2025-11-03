@@ -4,8 +4,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torchvision.transforms as transforms
 from torchvision import datasets
-from PIL import Image
 import os
+from .utils import clean_dataset
 
 # =======================================================
 #                   Configuration
@@ -51,18 +51,59 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.5]*3, std=[0.5]*3)
 ])
 
-train_dataset = datasets.ImageFolder("dataset/train", transform=transform)
-test_dataset = datasets.ImageFolder("dataset/test", transform=transform)
+# train_dataset = datasets.ImageFolder("dataset/train", transform=transform)
+# test_dataset = datasets.ImageFolder("dataset/test", transform=transform)
 
-train_loader = torch.utils.data.DataLoader(
-    train_dataset, 
-    batch_size=BATCH_SIZE, 
-    shuffle=True
-)
-test_loader = torch.utils.data.DataLoader(
-    test_dataset, 
-    batch_size=BATCH_SIZE
-)
+# train_loader = torch.utils.data.DataLoader(
+#     train_dataset, 
+#     batch_size=BATCH_SIZE, 
+#     shuffle=True
+# )
+# test_loader = torch.utils.data.DataLoader(
+#     test_dataset, 
+#     batch_size=BATCH_SIZE
+# )
+def get_data_loaders():
+    """Create and return data loaders for training and testing"""
+    # Check if dataset directories exist and have data
+    train_path = "dataset/train"
+    test_path = "dataset/test"
+    
+    if not os.path.exists(train_path) or not os.path.exists(test_path):
+        raise FileNotFoundError(
+            f"Dataset directories not found. Please create:\n"
+            f"  - {train_path}/fake/\n"
+            f"  - {train_path}/real/\n"
+            f"  - {test_path}/fake/\n"
+            f"  - {test_path}/real/"
+        )
+    
+    # Clean datasets before loading
+    clean_dataset(train_path)
+    clean_dataset(test_path)
+    
+    # Create datasets
+    train_dataset = datasets.ImageFolder(train_path, transform=transform)
+    test_dataset = datasets.ImageFolder(test_path, transform=transform)
+    
+    # Check if datasets have samples
+    if len(train_dataset) == 0:
+        raise ValueError(f"No images found in {train_path}. Please add images to train/fake/ and train/real/")
+    if len(test_dataset) == 0:
+        raise ValueError(f"No images found in {test_path}. Please add images to test/fake/ and test/real/")
+    
+    # Create data loaders
+    train_loader = torch.utils.data.DataLoader(
+        train_dataset, 
+        batch_size=BATCH_SIZE, 
+        shuffle=True
+    )
+    test_loader = torch.utils.data.DataLoader(
+        test_dataset, 
+        batch_size=BATCH_SIZE
+    )
+    
+    return train_loader, test_loader
 
 # =======================================================
 #                   Model Architecture
@@ -285,7 +326,6 @@ def load_model():
 def train_model():
     #Train the deepfake detection model
     #Skips training if model exists and dataset unchanged
-
     global model, optimizer
     
     # Check if training is needed
@@ -296,29 +336,23 @@ def train_model():
         return
     
     if model_exists:
-        print("Dataset changed - retraining model...")
+        print("Dataset changed, retraining model")
     else:
-        print("No saved model found - training new model...")
+        print("No saved model found, training new model")
+    
+    # Get data loaders (only when training is needed)
+    try:
+        train_loader, test_loader = get_data_loaders()
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Warning: {e}")
+        print("Skipping training, dataset not ready")
+        # If model exists, we can still use it for inference
+        if model_exists:
+            print("Will use existing model for inference")
+        return
     
     # Training loop
     print(f"\nTraining for {EPOCHS} epochs...")
-    for epoch in range(EPOCHS):
-        model.train()
-        total_loss = 0.0
-        
-        for inputs, labels in train_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
-            
-            optimizer.zero_grad()
-            outputs = model(inputs)
-            loss = criterion(outputs, labels)
-            loss.backward()
-            optimizer.step()
-            
-            total_loss += loss.item()
-        
-        avg_loss = total_loss / len(train_loader)
-        print(f"  Epoch {epoch+1}/{EPOCHS} - Loss: {avg_loss:.4f}")
     
     # Evaluation
     model.eval()

@@ -18,6 +18,10 @@ dataset/train/real/*
 /van-gogh-dataset/
 /uploads/
 
+
+#Ignore test folders
+/tests/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
