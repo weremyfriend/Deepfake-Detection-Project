@@ -20,7 +20,7 @@ dataset/train/real/*
 
 
 #Ignore test folders
-/tests/*
+/tests/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
