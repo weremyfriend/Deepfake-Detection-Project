@@ -1,9 +1,11 @@
 # Deepfake Detection Project
 
-## 1. Requirements
-Python 3.14.0
+The objective of this project is to design and implement a deepfake detection system using a Convolutional Neural Network (CNN). The system aims to detect whether an image is a deepfake image of a face (synthetically made or modified) or is a genuine, unaltered image of a face. It does this by analyzing facial and pixel-level inconsistencies and outputs a probability score indicating the likelihood that an image is fake. 
 
-pip 25.3
+## 1. Requirements
+**Python 3.14.0**
+
+**pip 25.3**
 
 
 PyTorch:        `pip install torch`
@@ -34,9 +36,8 @@ FastAPI (all dependencies) `pip install fastapi[all]`
 
 
 
-<!-- Added 10/30/2025 -->
 ## 2. Training
-There are good sources for training data with deepfake faces on Kaggle.
+Training data should be a diverse source of deepfake and real faces. Kaggle is a great source.
 
 Examples:
 
@@ -44,21 +45,24 @@ a. https://www.kaggle.com/datasets/philosopher0808/real-vs-ai-generated-faces-da
 
 b. https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images
 
->Add the training and testing images to their respective folders. <br>
->Adding images will make the model retrain on restart <br>
->Delete the contents in the saved_models folder to start from scratch if a model/optimizer is present
+**Add the images to train and test the model to dataset/train and dataset/test respectively.**
+
+
+
+Note: 
+Adding images will make the model retrain on restart! <br>
+
 
 
 
 ## 3. Run the FastAPI server
-To run the server you must be in the root of the proram <br>
+To run the server you must be in the root of the application and execute this command: <br>
 `uvicorn app.main:app --host 127.0.0.1 --port 5000 --reload`
 
-This will run the server using FastAPI and ensure the Python file can connect to the JavaScript file via an endpoint.
+Note: This will run the server using FastAPI and ensure the Python file can connect to the JavaScript file via an endpoint.
 
-<!--added 10/29/2025 - Walker Hall -->
 ## 4. UI
-Navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running the server
+To see the UI, navigate to `http://127.0.0.1:5000/ui/index.html` on the machine that's running the server
 
 <!-- 11/2/2025
 ## Testing (11/2/2025)
@@ -66,10 +70,6 @@ Run all unit tests `python -m unittest discover tests` or `pytest tests/ -v`
 -->
 
 ## Todo
-1. Fix UI routing
-2. Improve accuracy and performance of model from scratch
-3. Include different models
-4. Linux support with AMD GPUs  (ROCm)
-5. Containerization/deployable on a server
-6. Unrestricted file upload, CORS middleware, fix internal HTTP errors to prevent information disclosure, authentication, delete uploaded files, encrypt user data, and HTTPS.
-7. Detect deepfakes from videos
+1. Containerization/deployable on a server
+2. Unrestricted file upload, CORS middleware, fix internal HTTP errors to prevent information disclosure, authentication, delete uploaded files, encrypt user data, and HTTPS.
+3. Detect deepfakes from videos

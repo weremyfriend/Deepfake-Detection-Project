@@ -14,9 +14,12 @@ dataset/train/real/*
 !dataset/train/fake/.gitkeep
 !dataset/train/real/.gitkeep
 
-#Ignore original folders that are no longer needed
-/van-gogh-dataset/
-/uploads/
+
+IMAGES TO TEST THE APPLICATION/
+
+
+
+uploads/*
 
 
 #Ignore test folders
