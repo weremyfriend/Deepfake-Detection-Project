@@ -91,7 +91,7 @@ class TransferLearningCNN(nn.Module):
         self.backbone = models.efficientnet_b0(weights='DEFAULT')
         
         if freeze_backbone:
-            # Freeze early layers (already learned good features from ImageNet)
+            # Freeze early layers
             # Only train the last 40 layers to adapt to deepfake detection
             for param in list(self.backbone.parameters())[:-40]:
                 param.requires_grad = False
