@@ -2,8 +2,10 @@
 
 The objective of this project is to design and implement a deepfake detection system using a Convolutional Neural Network (CNN). The system aims to detect whether an image is a deepfake image of a face (synthetically made or modified) or is a genuine, unaltered image of a face. It does this by analyzing facial and pixel-level inconsistencies and outputs a probability score indicating the likelihood that an image is fake. The system uses a transfer-learning-based EfficientNet-B0 model for primary detection and a lightweight custom CNN fallback. Images are preprocessed (256×256 resize, normalization, tensor conversion) before inference, and the model outputs a probability score indicating whether the image is a deepfake.
 
+[Capstone Project Report](https://drive.google.com/file/d/1S-dfN4G4O5QwspAW9F9kwh-IjD_lVF1n/view?usp=drive_link)
+
 ## 1. Requirements
-### Python 3.14.0
+### Python 3.14
 ### pip 25.3
 
 PyTorch:        `pip install torch`
